@@ -1,3 +1,4 @@
-Pillow==8.2.0
+Pillow==12.1.0
 numpy==1.20.3
+ttkbootstrap
 # 他の依存関係をここに追加
