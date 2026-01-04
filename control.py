@@ -118,17 +118,21 @@ class Controller:
         writeAccountItem = self.ui.tk_select_box_AccountItem.get()
         write_year_month = writeDate[:6]
         output_folder_path = WORKOUT_PATH + "/" + write_year_month
-        #write_filename = current_image_path.split("/")[-1]
-        filename_with_extension = os.path.split(current_image_path)[-1]
-        filename_without_extension = os.path.splitext(filename_with_extension)[0]
         #--------------------------------------------------------
         message = f"请确认数据:\n日期: {writeDate}\n价格: {writePrice}\n评论: {writeComment}\n勘定項目: {writeAccountItem}"
         response = messagebox.askyesno("确认数据", message)
         if not response:
             return
-        write2csv(writeDate, writePrice, writeComment, writeAccountItem, filename_without_extension)
+        
+        # Close the image before moving it
         self.current_image.close()
-        move_file(current_image_path, output_folder_path)
+        
+        # Move the file and get the new name
+        new_filename = move_file(current_image_path, output_folder_path, writeDate, writeComment, writePrice)
+        
+        # Write to CSV with the new filename
+        write2csv(writeDate, writePrice, writeComment, writeAccountItem, new_filename)
+        
         self.reset_all_items()
 
         print("<Button-1>事件未处理: reset_all_items", evt)

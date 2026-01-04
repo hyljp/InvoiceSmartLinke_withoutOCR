@@ -85,7 +85,7 @@ def move_file(src, dest, date, comment, price):
     _, file_extension = os.path.splitext(src)
 
     # Create the new filename without extension
-    base_filename = f"{date}_{comment}_{price}"
+    base_filename = f"{date[2:]}_{comment}_{price}"
     new_filename = f"{base_filename}{file_extension}"
 
     dest_file_path = os.path.join(dest, new_filename)
@@ -98,6 +98,7 @@ def move_file(src, dest, date, comment, price):
         counter += 1
 
     shutil.move(src, dest_file_path)
+    return os.path.splitext(new_filename)[0]
 
 if __name__ == "__main__":
     folder_path = "path/to/your/image/folder"
