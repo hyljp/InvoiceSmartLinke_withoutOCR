@@ -1,0 +1,2 @@
+# InvoiceSmartLinke_withoutOCR
+个人事业主整理发票的软件。OCR识别率比较低，所以用人眼睛进行判断
